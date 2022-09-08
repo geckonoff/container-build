@@ -7,5 +7,6 @@ RUN echo $MY_NAME
 RUN echo $VERSION
 RUN echo $HTTP_PROXY
 
-CMD [ "/bin/bash", "-c", "--" ] 
-CMD [ "while", "true", ";", "do", "sleep", "30", ";", "done", ";" ]
+ADD run.sh /tmp/run.sh
+RUN chmod +x /tmp/run.sh
+ENTRYPOINT ["/tmp/run.sh"]
