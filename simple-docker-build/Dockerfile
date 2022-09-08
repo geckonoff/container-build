@@ -8,4 +8,4 @@ RUN echo $VERSION
 RUN echo $HTTP_PROXY
 
 CMD [ "/bin/bash", "-c", "--" ] 
-CMD [ "while true; do sleep 30; done;" ]
+CMD [ "while", "true", ";", "do", "sleep", "30", ";", "done", ";" ]
