@@ -1,7 +1,10 @@
 FROM registry.access.redhat.com/ubi8/ubi
 ENV MY_NAME="John Doe"
+ARG VERSION
 
 RUN echo $MY_NAME
+RUN echo $VERSION
+RUN echo $HTTP_PROXY
 
 RUN yum install -y nginx && \
     sed -i 's/80 default_server/8080 default_server/' /etc/nginx/nginx.conf && \
