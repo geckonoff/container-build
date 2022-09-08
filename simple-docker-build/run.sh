@@ -1,1 +1,5 @@
-while true;do sleep 30; done
+#!/bin/bash
+
+while true
+do sleep 30
+done
