@@ -1,12 +1,10 @@
-ARG VERSION=latest
-FROM busybox:$VERSION
-ARG VERSION
-ENV MY_NAME="John Doe"
-
-RUN echo $MY_NAME
-RUN echo $VERSION
-RUN echo $HTTP_PROXY
-
-ADD run.sh /tmp/run.sh
-RUN chmod +x /tmp/run.sh
-ENTRYPOINT ["/tmp/run.sh"]
+FROM nginx:stable-alpine
+# support running as arbitrary user which belogs to the root group
+RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx 
+EXPOSE 8080
+# comment user directive as master process is run as user in OpenShift anyhow
+RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
+RUN sed -i.bak 's/^user/#user/' /etc/nginx/conf.d/default.conf
+COPY --from=build build /usr/share/nginx/html
+RUN echo "$nginx_config" > /etc/nginx/conf.d/default.conf
+RUN cat  /etc/nginx/conf.d/default.conf
