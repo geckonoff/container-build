@@ -8,7 +8,6 @@ RUN echo $VERSION
 RUN echo $HTTP_PROXY
 WORKDIR /tmp
 RUN ls ./
-RUN ls tmp
 
 ADD run.sh /tmp/run.sh
 RUN chmod +x /tmp/run.sh
